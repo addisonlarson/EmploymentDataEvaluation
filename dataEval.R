@@ -214,6 +214,7 @@ firstWordMatch <- merge(igSub, neSub, by.x = "MATCHID_i", by.y = "MATCHID_n", al
 # This is checking out the percentage difference in recorded employment for
 # A given establishment
 matchIGtoNETS <- read.csv("matchIGtoNETS.csv")
+matchIGtoNETS$EMPLOYMENT_i[is.na(matchIGtoNETS$EMPLOYMENT_i)] <- 1
 matchIGtoNETS$pctDiff <- (abs(matchIGtoNETS$EMPLOYMENT_i - matchIGtoNETS$EMPLOYMENT_n)) / 
   ((matchIGtoNETS$EMPLOYMENT_i + matchIGtoNETS$EMPLOYMENT_n) / 2) * 100
 matchIGtoNETS$diff <- matchIGtoNETS$EMPLOYMENT_n - matchIGtoNETS$EMPLOYMENT_i
