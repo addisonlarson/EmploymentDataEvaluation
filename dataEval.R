@@ -98,9 +98,9 @@ allBlEmp[is.na(allBlEmp)] <- 0
 # write.csv(allBlEmp, file = "testBlocks.csv", row.names = FALSE)
 
 # SECTION 2: COMPARISON OF NETS and INFOGROUP EMPLOYMENT COUNTS TO LEHD
-# jobsPA <- "https://lehd.ces.census.gov/data/lodes/LODES7/pa/wac/pa_wac_S000_JT00_2015.csv.gz"
-# download.file(jobsPA, "pa_wac_S000_JT00_2015.csv.gz")
-jobsPAdf<- read.csv(gzfile("D:/alarson/SEPAPedCounting/data/pa_wac_S000_JT00_2015.csv.gz"))
+# jobsPA <- "https://lehd.ces.census.gov/data/lodes/LODES7/pa/wac/pa_wac_S000_JT00_2013.csv.gz"
+# download.file(jobsPA, "pa_wac_S000_JT00_2013.csv.gz")
+jobsPAdf<- read.csv(gzfile("D:/alarson/EmploymentDataEval/pa_wac_S000_JT00_2013.csv.gz"))
 jobsPAdf <- jobsPAdf[c(1:2)]
 jobsPAdf$st <- substr(jobsPAdf$w_geocode, 1, 2)
 jobsPAdf$cty <- substr(jobsPAdf$w_geocode, 3, 5)
@@ -113,11 +113,15 @@ blocksCounts <- merge(blocksCounts, jobsPAdf,
                       all.x = TRUE)
 blocksCounts <- blocksCounts[c(1:4)]
 blocksCounts[is.na(blocksCounts)] <- 0
-# write.csv(blocksCounts, "testBlocks2.csv", row.names = FALSE)
 blocksCounts$bg <- substr(blocksCounts$Block.GEOID, 1, 12)
 lehdBgAgg <- aggregate(blocksCounts$C000, list(blocksCounts$bg), FUN = sum)
 blocksCounts$trct <- substr(blocksCounts$Block.GEOID, 1, 11)
 lehdTrctAgg <- aggregate(blocksCounts$C000, list(blocksCounts$trct), FUN = sum)
+blocksCounts$pdNETSIG <- ((abs(blocksCounts$NETS - blocksCounts$InfoGroup)) / ((blocksCounts$NETS + blocksCounts$InfoGroup) / 2)) * 100
+blocksCounts$pdNETSLEHD <- ((abs(blocksCounts$NETS - blocksCounts$C000)) / ((blocksCounts$NETS + blocksCounts$C000) / 2)) * 100
+blocksCounts$pdIGLEHD <- ((abs(blocksCounts$InfoGroup - blocksCounts$C000)) / ((blocksCounts$C000 + blocksCounts$InfoGroup) / 2)) * 100
+blocksCounts[is.na(blocksCounts)] <- 0
+# write.csv(blocksCounts, "testBlocks2.csv", row.names = FALSE)
 
 # SECTION 3: IDENTIFY DUPLICATE RECORDS (NAME AND ADDRESS)
 samp <- read.csv("infoGroupSampleDuplicates.csv")
