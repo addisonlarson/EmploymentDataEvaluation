@@ -32,12 +32,12 @@
 \maketitle
 \section{Overview}
 This paper evaluates differences in the 2013 vintage of two employment data sources available for purchase---the National Establishment Time-Series (NETS) and InfoUSA---for Conshohocken, Montgomery County, PA. Specifically, these two datasets are evaluated based on summations of employment over census blocks, block groups, and tracts; the overall composition of establishments by number employed; establishment-level differences in employment; differences among large employers; and overall data quality. See Table 1, \textit{General Properties of NETS and InfoUSA Data for Conshohocken}, for a brief overview of the two datasets.\par
-The Delaware Valley Regional Planning Commission (DVRPC) purchases NETS data when it becomes available. This occurred most recently in 2013. However, NETS data requires extensive manual cleanup for DVRPC's nine-county region. If InfoUSA data requires substantially less correction, then it may be worth the additional cost to purchase it instead of NETS. This paper assumes NETS data is already clean and consistent.\par
+The Delaware Valley Regional Planning Commission (DVRPC) purchases NETS data when it becomes available. This occurred most recently in 2013. However, NETS data requires extensive manual cleanup for DVRPC's nine-county region. If InfoUSA data requires substantially less correction, then it may be worth the additional cost to purchase it instead of NETS. This paper assumes NETS data is already clean and consistent. See Table 4, \textit{DVRPC Internal Assessment of Data Sources}, to see a summary of DVRPC's conclusions on purchasing NETS vs. InfoUSA.\par
 There are critical differences between NETS and InfoUSA data sources, as well as between these sources and LEHD (Longitudinal Employer-Household Dynamics) data, which is used for comparative purposes when aggregating employment across Census geographies.\footnote{For more on employment data sources, see NCHRP 08-36, Task 127, \textit{Employment Data for Planning: A Resource Guide}. Retrieved from \href{http://onlinepubs.trb.org/onlinepubs/nchrp/docs/NCHRP08-36(127)_EmployDataGuide.PDF}{http://onlinepubs.trb.org/onlinepubs/nchrp/docs/NCHRP08-36(127)\_EmployDataGuide.PDF}.}
 \begin{enumerate}
-	\item \textbf{NETS} is... (\textbf{\textit{HALP!}} I plan to fill in more on this section once I hear answers to the question: what do you want people to know about these data sources?)
-	\item \textbf{InfoUSA} is...
-	\item \textbf{LEHD} is a Census Bureau program providing free and publicly-available data on workers, workplace characteristics, and commuting flows at the census block level. LEHD data is synthesized from multiple imputation of tax and employment records.\footnote{For more on the creation of LEHD, see Technical Paper TP-2006-01, \textit{The LEHD Infrastructure Files and the Creation of the Quarterly Workforce Indicators}. Retrieved from \href{https://lehd.ces.census.gov/doc/technical_paper/tp-2006-01.pdf}{https://lehd.ces.census.gov/doc/technical\_paper/tp-2006-01.pdf}.} Because of privacy concerns, some noise is introduced in the data. Even though LEHD data is derived from tax records, it is likely geocoded using the Census Geocoder, which is less spatially accurate than other geocoding options \textbf{\textit{HALP!}} Is this true, or it is more accurately that something like Google can better handle idiosyncrasies in address quality?
+	\item \textbf{NETS} is an establishment-level time series database derived from Dun and Bradstreet data. All employers are linked over time using unique DUNS numbers. Other useful fields include the number of employees by establishment, 6-digit NAICS and 8-digit SIC codes, and geocoded establishment locations. While NETS is less expensive than InfoUSA, there is also a considerable lag in updates: NETS 2015 was released on September 9, 2018.
+	\item \textbf{InfoUSA} is an establishment-level business database. It is considerably more expensive than NETS, but it is also consistently updated, as InfoGroup contacts every employer once yearly to ensure their information is accurate. In addition to a number of employees by establishment, InfoUSA provides 6-digit NAICS codes, 8-digit SIC codes, and geocoded establishment locations.
+	\item \textbf{LEHD} is a Census Bureau program providing free and publicly-available data on workers, workplace characteristics, and commuting flows at the census block level. LEHD data is synthesized from multiple imputation of tax and employment records.\footnote{For more on the creation of LEHD, see Technical Paper TP-2006-01, \textit{The LEHD Infrastructure Files and the Creation of the Quarterly Workforce Indicators}. Retrieved from \href{https://lehd.ces.census.gov/doc/technical_paper/tp-2006-01.pdf}{https://lehd.ces.census.gov/doc/technical\_paper/tp-2006-01.pdf}.} Because of privacy concerns, some noise is introduced in the data. Even though LEHD data is derived from tax records, it is likely geocoded using the Census Geocoder. In DVRPC's experience, the Census Geocoder is less accurate than options like Google because the Census Geocoder more frequently uses range interpolation.
 \end{enumerate}
 \paragraph{Results.} There is no clear winner from this analysis. None of the datasets gives an indication that it is more truthful than the others. This is especially true when the data is spatially aggregated to the census tract level, as all three datasets present separate qualms to the analyst:
 \begin{enumerate}
@@ -56,7 +56,7 @@ Here are some basic findings:
 \section{Summations of Employment Counts by Geographic Level}
 When NETS and InfoUSA point-level employment data are aggregated to the block, block group, and census tract level, the counts differ greatly within each spatial unit. This section uses 2013 LEHD Workplace Area Characteristics as an employment comparison for NETS and InfoUSA.
 \paragraph{Tract- and Block Group-Level Differences.} Table 2, \textit{Differences in Employment, Tract Level}, and Table 3, \textit{Differences in Employment, Block Group Level}, show the employment tallies for NETS, InfoUSA, and LEHD data at the census tract and block group levels, respectively. It is suspicious that InfoUSA has 655 employees recorded for Block Group 420912041021 and Tract 42091204102, given that NETS and InfoUSA have nearly zero employees recorded for the same area. In addition, it is suspicious that LEHD has 178 employees recorded for Block Group 420912059062 and Tract 42091205906, when neither NETS nor InfoUSA have similar counts. The discrepancies may point to the need to manually correct both InfoUSA \textit{and} LEHD data.
-\paragraph{Block-Level Differences.} Table 4, \textit{Differences in Employment, Block Level}, includes the counts by block and three additional columns: NETS x IG, NETS x LEHD, and IG x LEHD. (IG stands for InfoGroup, the parent company of InfoUSA.) A value of ``Yes'' in any of these columns indicates absolute percentage difference\footnote{The absolute percentage difference is calculated as: \[ \frac{\lvert v_{1} - v_{2} \rvert}{\frac{v_{1} + v_{2}}{2}} \times 100 \]} between employment counts in the datasets equal to or exceeding 100\%. For example, if the sum of employment over a block were 64 and 20 for NETS and InfoUSA, respectively, the NETS x IG column would read ``Yes,'' because there is a 104.7\% absolute difference between 64 and 20. The results of the absolute percentage difference calculations indicate that InfoUSA and LEHD counts are the most similar at the block level, with 16 of 46 blocks differing over 100\% in job counts.
+\paragraph{Block-Level Differences.} Table 6, \textit{Differences in Employment, Block Level}, includes the counts by block and three additional columns: NETS x IG, NETS x LEHD, and IG x LEHD. (IG stands for InfoGroup, the parent company of InfoUSA.) A value of ``Yes'' in any of these columns indicates absolute percentage difference\footnote{The absolute percentage difference is calculated as: \[ \frac{\lvert v_{1} - v_{2} \rvert}{\frac{v_{1} + v_{2}}{2}} \times 100 \]} between employment counts in the datasets equal to or exceeding 100\%. For example, if the sum of employment over a block were 64 and 20 for NETS and InfoUSA, respectively, the NETS x IG column would read ``Yes,'' because there is a 104.7\% absolute difference between 64 and 20. The results of the absolute percentage difference calculations indicate that InfoUSA and LEHD counts are the most similar at the block level, with 16 of 46 blocks differing over 100\% in job counts.
 \paragraph{Overall Count Differences.} In general, NETS has little in common with either InfoUSA or LEHD. InfoUSA has the fewest job counts overall, at 4,870. Though the LEHD counts lie closer to InfoUSA than to LEHD for the borough of Conshohocken, there is no clear evidence which of these datasets is the most accurate.
 \section{Composition of Establishments by Data Source and Number Employed}
 For the borough of Conshohocken, NETS has 637 observations and InfoUSA has 304. Because of the discrepancy in the number of overall records, Figure 1, \textit{Percentage of Establishments at Six Employment Levels}, shows the percentage of establishments at each employment level. The results indicate that InfoUSA has a higher percentage of large employers. NETS has more employees in Conshohocken partially because it has more records overall.\par
@@ -91,7 +91,7 @@ This section, as with the rest of the paper, assumes NETS data is already clean 
 	\item 4 of 143 (2.8\%) of addresses were P.O. boxes.
 	\item 14 of 143 (9.8\%) had the exact same address and suite number. In one instance, 12 establishments shared the same suite, which is suspicious.
 \end{enumerate}
-\clearpage
+
 \section{Tables}
 \begin{table}[h]
 	\begin{center}
@@ -150,6 +150,58 @@ This section, as with the rest of the paper, assumes NETS data is already clean 
 		\end{tabular}
 	\end{center}
 	\caption{Differences in Employment, Block Group Level.}
+\end{table}
+\clearpage
+\begin{table}[h]
+	\begin{center}
+		\begin{tabular}{ p{1.5in} | p{1.25in} p{1.25in} p{1.25in} }
+			Block Group GEOID & NETS & InfoUSA & LEHD \\
+			\hline
+			\hline
+			Geocoding Accuracy & 2/3. Have previously cleaned dataset. & 1/3. Cannot import existing info from NETS. & 0/3. Census Geocoder, noise added.\\
+			\hline 
+			Presence of Duplicates & 1/3. Prevalent. & 1/3. Prevalent. & 0/3. Not available.\\
+			\hline 
+			Available SIC/NAICS Codes & 3/3. Highly detailed. & 3/3. Highly detailed. & 1/3. 2-digit NAICS.\\
+			\hline
+			Accurate Employment Count & 1/3. Cannot determine veracity. & 1/3. Cannot determine veracity. & 1/3. Noise added to block-level data.\\
+			\hline
+			Update Frequency & 1/3. 2015 release occurred Sept. 2018. & 3/3. Can request newest data anytime. & 1/3. No release calendar. \\
+			\hline
+			Establishment Level & 3/3. Available. & 3/3. Available. & 0/3. Not available.\\
+			\hline
+			Cost & 2/3. Affordable. & 1/3. Expensive. & 3/3. Free. \\
+			\hline
+			\hline
+			\textbf{TOTAL} & 13/21 & 13/21 & 6/21 \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\caption{DVRPC Assessment of Data Sources.}
+\end{table}
+\begin{table}[h]
+	\begin{center}
+		\begin{tabular}{ r | c c }
+			Employer & NETS & InfoUSA \\
+			\hline
+			\hline
+			A & 56 & 75 \\
+			\hline 
+			B & 56 & 64 \\
+			\hline 
+			C & 171 & 165 \\
+			\hline
+			D & 363 & 250 \\
+			\hline 
+			E & 182 & 300 \\
+			\hline 
+			F & 138 & 110 \\
+			\hline 
+			G & 60 & 75 \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\caption{Differences in Employment for Seven Large Employers.}
 \end{table}
 \clearpage
 \pagestyle{empty}
@@ -258,31 +310,4 @@ This section, as with the rest of the paper, assumes NETS data is already clean 
 	\end{center}
 	\caption{Differences in Employment, Block Level.}
 \end{table}
-\clearpage
-\pagestyle{plain}
-\begin{table}[h]
-	\begin{center}
-		\begin{tabular}{ r | c c }
-			Employer & NETS & InfoUSA \\
-			\hline
-			\hline
-			A & 56 & 75 \\
-			\hline 
-			B & 56 & 64 \\
-			\hline 
-			C & 171 & 165 \\
-			\hline
-			D & 363 & 250 \\
-			\hline 
-			E & 182 & 300 \\
-			\hline 
-			F & 138 & 110 \\
-			\hline 
-			G & 60 & 75 \\
-			\hline
-		\end{tabular}
-	\end{center}
-	\caption{Differences in Employment for Seven Large Employers.}
-\end{table}
-
 \end{document}
