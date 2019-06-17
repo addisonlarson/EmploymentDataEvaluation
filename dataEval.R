@@ -29,7 +29,7 @@ pack(packages)
 
 # Load data
 rm(list=ls())
-setwd("D:/alarson/EmploymentDataEval")
+setwd("P:/alarson/employment_data_evaluation")
 ig <- read.csv("InfoGroupFull.csv")
 ne <- read.csv("NETSFull.csv")
 nets <- readOGR(".", "NETS_Consho")
@@ -100,7 +100,7 @@ allBlEmp[is.na(allBlEmp)] <- 0
 # SECTION 2: COMPARISON OF NETS and INFOGROUP EMPLOYMENT COUNTS TO LEHD
 # jobsPA <- "https://lehd.ces.census.gov/data/lodes/LODES7/pa/wac/pa_wac_S000_JT00_2013.csv.gz"
 # download.file(jobsPA, "pa_wac_S000_JT00_2013.csv.gz")
-jobsPAdf<- read.csv(gzfile("D:/alarson/EmploymentDataEval/pa_wac_S000_JT00_2013.csv.gz"))
+jobsPAdf<- read.csv(gzfile("P:/alarson/employment_data_evaluation/pa_wac_S000_JT00_2013.csv.gz"))
 jobsPAdf <- jobsPAdf[c(1:2)]
 jobsPAdf$st <- substr(jobsPAdf$w_geocode, 1, 2)
 jobsPAdf$cty <- substr(jobsPAdf$w_geocode, 3, 5)
